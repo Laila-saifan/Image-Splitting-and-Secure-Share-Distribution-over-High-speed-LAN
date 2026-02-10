@@ -37,34 +37,34 @@ The following Python libraries must be installed before running the project:
 ## Installing Dependencies
 
 Run the following command in the project directory:
-```bash
+
 pip install cryptography pillow customtkinter
 
 Built-in libraries do not require installation.
 
-Network Requirements
 
-All devices must be connected to the same Local Area Network (LAN)
+System Requirements and Security Design
+---------------------------------------
 
-TCP communication must be allowed through the firewall
+## Network Requirements:
+- All devices must be connected to the same Local Area Network (LAN)
+- TCP socket communication must be allowed through the firewall
+- Required ports must be open to enable reliable client-server communication
 
-Required ports must be open for client-server communication
+## Security Requirements:
+- AES-GCM encryption is used to encrypt each image segment independently
+- Mapping files are stored in encrypted form and decrypted only at runtime
+- SHA-256 hashing is used to uniquely identify images and verify data integrity
+  during the reassembly process
 
-Security Requirements
+## System Notes:
+- Each client device runs a background service to receive and store encrypted segments
+- No single device stores the complete image, reducing the risk of data exposure
+- Proper key management is essential for successful image reconstruction
+- Mapping files must be correctly decrypted and available during the reassembly phase
+"""
 
-AES-GCM encryption is used for encrypting image segments
-
-Mapping files are encrypted and decrypted at runtime
-
-SHA-256 hashing is used to uniquely identify images and verify integrity
-
-Notes
-
-Each client device runs a background service to receive and store encrypted segments
-
-No single device stores the complete image
-
-How to Run
+## How to Run
 
 Start client services on all participating devices
 
